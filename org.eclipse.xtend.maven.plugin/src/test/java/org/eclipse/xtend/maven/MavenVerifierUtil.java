@@ -29,8 +29,9 @@ public class MavenVerifierUtil {
 		}
 		;
 
-		verifier.setSystemProperty("gradleMavenRepo", System.getProperty("gradleMavenRepo"));
-		verifier.setLocalRepo(localRepo);
+		verifier.setSystemProperty("gradleMavenRepo", System.getProperty("xtext.workspace.dir")+"/build/maven-repository");
+		System.err.println("lmr: " + localRepo + " gr: " + System.getProperty("gradleMavenRepo"));
+		verifier.setLocalRepo(System.getProperty("xtext.workspace.dir")+"/.m2/repository/");
 		verifier.setDebug(true);
 		// verifier.setMavenDebug(true);
 		// verifier.setDebugJvm(true);
