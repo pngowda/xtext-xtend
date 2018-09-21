@@ -628,9 +628,14 @@ public class XtendBatchCompiler {
 		if (isVerbose()) {
 			commandLine.add("-verbose");
 		}
-		List<String> bootClassPathEntries = getBootClassPathEntries();
-		if (!isEmpty(bootClassPathEntries)) {
-			commandLine.add("-bootclasspath \"" + concat(File.pathSeparator, bootClassPathEntries) + "\"");
+		if (getJavaSourceVersion() != null) {
+			JavaVersion version = JavaVersion.fromQualifier(getJavaSourceVersion());
+			if (!version.isAtLeast(JavaVersion.JAVA9)) {
+				List<String> bootClassPathEntries = getBootClassPathEntries();
+				if (!isEmpty(bootClassPathEntries)) {
+					commandLine.add("-bootclasspath \"" + concat(File.pathSeparator, bootClassPathEntries) + "\"");
+				}
+			}
 		}
 		if (!isEmpty(classPathEntries)) {
 			commandLine.add("-cp \"" + Joiner.on(File.pathSeparator).join(classPathEntries) + "\"");
