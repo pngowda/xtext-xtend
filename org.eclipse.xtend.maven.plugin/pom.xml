@@ -22,7 +22,6 @@
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
-			<version>${guava.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtend</groupId>
@@ -54,16 +53,23 @@
 			<artifactId>org.eclipse.xtend.lib</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.eclipse.emf</groupId>
 			<artifactId>org.eclipse.emf.common</artifactId>
-			<version>${emf.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.emf</groupId>
 			<artifactId>org.eclipse.emf.ecore</artifactId>
-			<version>${emf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.ecore.xmi</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.codegen</artifactId>
+			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.google.inject</groupId>
@@ -96,7 +102,6 @@
 		<dependency>
 			<groupId>org.ow2.asm</groupId>
 			<artifactId>asm-commons</artifactId>
-			<version>${asm.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.maven</groupId>
@@ -115,12 +120,6 @@
 			<version>1.4</version>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.eclipse.emf</groupId>
-			<artifactId>org.eclipse.emf.ecore.xmi</artifactId>
-			<version>${emf.version}</version>
-			<scope>runtime</scope>
-		</dependency>
 		<!-- Explicit antl-runtime dependency to 3.2 to avoid loading of mismatched 
 			transitive dependencies -->
 		<dependency>
@@ -133,12 +132,6 @@
 					<groupId>org.antlr</groupId>
 				</exclusion>
 			</exclusions>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.emf</groupId>
-			<artifactId>org.eclipse.emf.codegen</artifactId>
-			<version>${emfCodegen.version}</version>
 			<scope>runtime</scope>
 		</dependency>
 	</dependencies>
