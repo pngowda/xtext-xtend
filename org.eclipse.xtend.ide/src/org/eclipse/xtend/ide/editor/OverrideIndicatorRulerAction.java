@@ -122,7 +122,7 @@ public class OverrideIndicatorRulerAction extends ResourceAction implements IAct
 	}
 
 	protected void runInternal() {
-		getDocument().priorityReadOnly(new IUnitOfWork.Void<XtextResource>() {
+		getDocument().tryPriorityReadOnly(new IUnitOfWork.Void<XtextResource>() {
 			@Override
 			public void process(XtextResource resource) throws Exception {
 				XtendFunction xtendFunction = (XtendFunction) resource.getEObject(overrideIndicatorAnnotation.getFunctionURIFragment());

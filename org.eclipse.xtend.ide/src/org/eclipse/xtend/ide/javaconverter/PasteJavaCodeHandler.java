@@ -69,7 +69,7 @@ public class PasteJavaCodeHandler extends AbstractHandler {
 			project = JavaCore.create(iProject);
 		}
 		final int selectionOffset = sourceViewer.getSelectedRange().x - 1;
-		EObject targetElement = xtextDocument.readOnly(new IUnitOfWork<EObject, XtextResource>() {
+		EObject targetElement = xtextDocument.tryReadOnly(new IUnitOfWork<EObject, XtextResource>() {
 
 			@Override
 			public EObject exec(XtextResource state) throws Exception {

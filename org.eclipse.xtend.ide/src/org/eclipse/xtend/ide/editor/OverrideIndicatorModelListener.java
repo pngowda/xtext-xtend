@@ -130,14 +130,12 @@ public class OverrideIndicatorModelListener extends NullImpl implements IXtextMo
 		IXtextDocument xtextDocument = xtextEditor.getDocument();
 		IAnnotationModel annotationModel = xtextEditor.getInternalSourceViewer().getAnnotationModel();
 		Map<Annotation, Position> annotationToPosition = xtextDocument
-				.readOnly(new CancelableUnitOfWork<Map<Annotation, Position>, XtextResource>() {
+				.tryReadOnly(new CancelableUnitOfWork<Map<Annotation, Position>, XtextResource>() {
 					@Override
 					public Map<Annotation, Position> exec(XtextResource xtextResource, CancelIndicator cancelIndicator) {
-						if (xtextResource == null)
-							return Collections.emptyMap();
 						return createOverrideIndicatorAnnotationMap(xtextResource, cancelIndicator);
 					}
-		});
+				}, () -> {return Collections.emptyMap();});
 		if (monitor.isCanceled())
 			return Status.CANCEL_STATUS;
 		if (annotationModel instanceof IAnnotationModelExtension) {

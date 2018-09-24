@@ -146,8 +146,11 @@ public class CodeBuilderQuickfix {
         }
         return _xblockexpression;
       };
-      final ReplacingAppendable appendable = document.<ReplacingAppendable>readOnly(_function_1);
-      Integer offset = wrapper.get();
+      final ReplacingAppendable appendable = document.<ReplacingAppendable>tryReadOnly(_function_1);
+      if ((appendable == null)) {
+        return;
+      }
+      final Integer offset = wrapper.get();
       builder.build(appendable);
       appendable.commitChanges();
       xtextEditor.setHighlightRange(((offset).intValue() + 1), appendable.length(), true);

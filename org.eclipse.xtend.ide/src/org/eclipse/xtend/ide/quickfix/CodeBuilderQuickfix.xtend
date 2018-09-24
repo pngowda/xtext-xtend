@@ -87,7 +87,7 @@ class CodeBuilderQuickfix {
 			val xtextEditor = editor as XtextEditor;
 			val document = xtextEditor.getDocument();
 			val wrapper = Wrapper.forType(Integer)
-			val appendable = document.readOnly [ resource |
+			val appendable = document.tryReadOnly [ resource |
 				var offset = builder.getInsertOffset(resource)
 				wrapper.set(offset)
 				val typeIndentation = getTypeIndentation(resource, document, xtendClass)
@@ -95,9 +95,10 @@ class CodeBuilderQuickfix {
 					baseIndentationLevel = builder.indentationLevel + typeIndentation
 					ensureEmptyLinesAround = true
 				])				
-			] 
+			]
+			if (appendable === null) return;
 			
-			var offset = wrapper.get
+			val offset = wrapper.get
 			builder.build(appendable)
 			appendable.commitChanges
 			xtextEditor.setHighlightRange(offset + 1, appendable.length, true)

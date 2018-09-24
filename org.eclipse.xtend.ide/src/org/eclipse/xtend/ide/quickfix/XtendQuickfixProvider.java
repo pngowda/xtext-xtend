@@ -496,7 +496,7 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 	}
 
 	private Boolean isJvmConstructorCall(IXtextDocument xtextDocument, final Issue issue) {
-		return xtextDocument.readOnly(new IUnitOfWork<Boolean, XtextResource>() {
+		return xtextDocument.tryReadOnly(new IUnitOfWork<Boolean, XtextResource>() {
 
 			@Override
 			public Boolean exec(XtextResource xtextResource) throws Exception {

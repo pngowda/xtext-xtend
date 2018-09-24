@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.refactoring;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -63,14 +64,15 @@ public class ExtractMethodHandler extends AbstractHandler {
 			if (editor != null) {
 				final ITextSelection selection = (ITextSelection) editor.getSelectionProvider().getSelection();
 				final IXtextDocument document = editor.getDocument();
-				XtextResource copiedResource = document.priorityReadOnly(new IUnitOfWork<XtextResource, XtextResource>() {
+				XtextResource copiedResource = document.tryPriorityReadOnly(new IUnitOfWork<XtextResource, XtextResource>() {
 					@Override
 					public XtextResource exec(XtextResource state) throws Exception {
 						return resourceCopier.loadIntoNewResourceSet(state);
 					}
 				});
-				List<XExpression> expressions = expressionUtil.findSelectedSiblingExpressions(copiedResource,
-						selection);
+				List<XExpression> expressions = copiedResource == null ?
+						Collections.emptyList() :
+						expressionUtil.findSelectedSiblingExpressions(copiedResource, selection);
 				if (!expressions.isEmpty()) {
 					ExtractMethodRefactoring extractMethodRefactoring = refactoringProvider.get();
 					if (extractMethodRefactoring.initialize(editor, expressions, true)) {
